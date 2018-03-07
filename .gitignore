@@ -30,3 +30,10 @@
 # Folders
 build/
 *~
+*.avi
+.DS_Store
+etc/shape_predictor_68_face_landmarks.dat
+*.jpg
+*.png
+*.png
+*.png

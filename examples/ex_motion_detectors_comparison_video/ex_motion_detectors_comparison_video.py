@@ -20,8 +20,8 @@ from deepgaze.motion_detection import MogMotionDetector
 from deepgaze.motion_detection import Mog2MotionDetector
 
 #Open the video file and loading the background image
-video_capture = cv2.VideoCapture("./cars.avi")
-background_image = cv2.imread("./background.png")
+video_capture = cv2.VideoCapture("/Users/adi/Documents/GitHub/deepgaze/examples/ex_motion_detectors_comparison_video/cars.avi")
+background_image = cv2.imread("/Users/adi/Documents/GitHub/deepgaze/examples/ex_motion_detectors_comparison_video/background.png")
 
 #Decalring the diff motion detector object and setting the background
 my_diff_detector = DiffMotionDetector()
@@ -34,11 +34,12 @@ my_mog2_detector = Mog2MotionDetector()
 my_mog2_detector.returnGreyscaleMask(background_image)
 
 # Define the codec and create VideoWriter objects
-fourcc = cv2.cv.CV_FOURCC(*'XVID')
-out = cv2.VideoWriter("./cars_original.avi", fourcc, 20.0, (1920,1080))
-out_diff = cv2.VideoWriter("./cars_diff.avi", fourcc, 20.0, (1920,1080))
-out_mog = cv2.VideoWriter("./cars_mog.avi", fourcc, 20.0, (1920,1080))
-out_mog2 = cv2.VideoWriter("./cars_mog2.avi", fourcc, 20.0, (1920,1080))
+# fourcc = cv2.cv.CV_FOURCC(*'XVID')
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter("/Users/adi/Documents/GitHub/deepgaze/examples/ex_motion_detectors_comparison_video/cars_original.avi", fourcc, 20.0, (1920,1080))
+out_diff = cv2.VideoWriter("/Users/adi/Documents/GitHub/deepgaze/examples/ex_motion_detectors_comparison_video/cars_diff.avi", fourcc, 20.0, (1920,1080))
+out_mog = cv2.VideoWriter("/Users/adi/Documents/GitHub/deepgaze/examples/ex_motion_detectors_comparison_video/cars_mog.avi", fourcc, 20.0, (1920,1080))
+out_mog2 = cv2.VideoWriter("/Users/adi/Documents/GitHub/deepgaze/examples/ex_motion_detectors_comparison_video/cars_mog2.avi", fourcc, 20.0, (1920,1080))
 
 
 while(True):

@@ -108,8 +108,7 @@ class MogMotionDetector:
             In other words, it is the minimum prior probability that the background is in the scene.
         @param noise specifies the noise strenght
         """
-        self.BackgroundSubtractorMOG = cv2.BackgroundSubtractorMOG(history, numberMixtures, backgroundRatio, noise)
-
+        self.backsub = cv2.bgsegm.createBackgroundSubtractorMOG(history, numberMixtures, backgroundRatio, noise)
 
     def returnMask(self, foreground_image):
         """Return the binary image after the detection process
@@ -117,7 +116,7 @@ class MogMotionDetector:
         @param foreground_image the frame to check
         @param threshold the value used for filtering the pixels after the absdiff
         """
-        return self.BackgroundSubtractorMOG.apply(foreground_image)
+        return self.backsub.apply(foreground_image)
 
 class Mog2MotionDetector:
     """Motion is detected through the Imporved Mixtures of Gaussian (MOG) 
@@ -137,7 +136,7 @@ class Mog2MotionDetector:
         """Init the color detector object.
 
         """
-        self.BackgroundSubtractorMOG2 = cv2.BackgroundSubtractorMOG2()
+        self.backsub2 = cv2.createBackgroundSubtractorMOG2()
 
 
     def returnMask(self, foreground_image):
@@ -147,7 +146,7 @@ class Mog2MotionDetector:
         """
         #Since the MOG2 returns shadows with value 127 we have to
         #filter these values in order to have a binary mask
-        img = self.BackgroundSubtractorMOG2.apply(foreground_image)
+        img = self.backsub2.apply(foreground_image)
         ret, thresh = cv2.threshold(img, 126, 255,cv2.THRESH_BINARY)
         return thresh 
 
@@ -159,4 +158,4 @@ class Mog2MotionDetector:
         mask since it incorporates the shadow pixels.
         @param foreground_image the frame to check
         """
-        return self.BackgroundSubtractorMOG2.apply(foreground_image)
+        return self.backsub2.apply(foreground_image)

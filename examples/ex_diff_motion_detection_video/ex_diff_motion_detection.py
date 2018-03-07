@@ -23,8 +23,8 @@ from deepgaze.motion_detection import DiffMotionDetector
 from deepgaze.mask_analysis import BinaryMaskAnalyser
 
 #Open the video file and loading the background image
-video_capture = cv2.VideoCapture("./cars.avi")
-background_image = cv2.imread("./background.png")
+video_capture = cv2.VideoCapture("/Users/adi/Documents/GitHub/deepgaze/examples/ex_diff_motion_detection_video/cars.avi")
+background_image = cv2.imread("/Users/adi/Documents/GitHub/deepgaze/examples/ex_diff_motion_detection_video/background.png")
 
 #Decalring the motion detector object and setting the background
 my_motion_detector = DiffMotionDetector()
@@ -34,8 +34,10 @@ my_motion_detector.setBackground(background_image)
 my_mask_analyser = BinaryMaskAnalyser()
 
 # Define the codec and create VideoWriter object
-fourcc = cv2.cv.CV_FOURCC(*'XVID')
-out = cv2.VideoWriter("./cars_deepgaze.avi", fourcc, 20.0, (1920,1080))
+width = int(video_capture.get(cv2.CAP_PROP_FRAME_WIDTH) + 0.5)
+height = int(video_capture.get(cv2.CAP_PROP_FRAME_HEIGHT) + 0.5)
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter("/Users/adi/Documents/GitHub/deepgaze/examples/ex_diff_motion_detection_video/cars_deepgaze.avi", fourcc, 20.0, (width,height))
 
 #Create the main window and move it
 cv2.namedWindow('Video')

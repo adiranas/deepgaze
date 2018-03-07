@@ -33,14 +33,17 @@ from deepgaze.motion_tracking import ParticleFilter
 #Substitute the frame to the default template.png.
 USE_WEBCAM = False
 
-template = cv2.imread('template.png') #Load the image
+template = cv2.imread('/Users/adi/Documents/GitHub/deepgaze/examples/ex_particle_filter_object_tracking_video/template.png') #Load the image
 if(USE_WEBCAM == False):
-    video_capture = cv2.VideoCapture("./cows.avi")
+    video_capture = cv2.VideoCapture("rtsp://192.168.0.99:80/live/0/h264.sdp?basic=YWRtaW46aG9zcGl0YWxpdHk=")
 else:
     video_capture = cv2.VideoCapture(0) #Open the webcam
 # Define the codec and create VideoWriter object
-fourcc = cv2.cv.CV_FOURCC(*'XVID')
-out = cv2.VideoWriter("./cows_output.avi", fourcc, 25.0, (1920,1080))
+#fourcc = cv2.cv.CV_FOURCC(*'XVID')
+width = int(video_capture.get(cv2.CAP_PROP_FRAME_WIDTH) + 0.5)
+height = int(video_capture.get(cv2.CAP_PROP_FRAME_HEIGHT) + 0.5)
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter("/Users/adi/Documents/GitHub/deepgaze/examples/ex_particle_filter_object_tracking_video/cows_output.avi", fourcc, 25.0, (width,height))
 
 #Declaring the binary mask analyser object
 my_mask_analyser = BinaryMaskAnalyser()
